@@ -1,21 +1,21 @@
-const BinaryTree = require('./BinaryTree')
-const LinkedList = require('./LinkedList')
-const Queue = require('./Queue')
-const Stack = require('./Stack')
+const BinaryTree = require('./data-structures/BinaryTree')
+const LinkedList = require('./data-structures/LinkedList')
+const Queue = require('./data-structures/Queue')
+const Stack = require('./data-structures/Stack')
+const quickSort = require('./algorithms/quickSort')
+const radixSort = require('./algorithms/radixSort')
 
-const binaryTree = new BinaryTree()
-const getRand = () => Math.floor(Math.random() * 9)
+const getRandomNumber = () => Math.floor(Math.random() * 100)
 
-binaryTree.insert(2)
-binaryTree.insert(4)
-binaryTree.insert(3)
-binaryTree.insert(5)
-binaryTree.insert(6)
-binaryTree.insert(4)
-binaryTree.insert(4)
-binaryTree.print()
-binaryTree.remove(4)
-binaryTree.print()
+const getRandomList = length => {
+  const list = []
+  for(let i = 0; i < length; i++) {
+    list.push(getRandomNumber())
+  }
+  return list
+}
 
-window.binaryTree = binaryTree
-
+const list = getRandomList(9)
+console.log('list', list)
+const sorted = radixSort(list)
+console.log('sorted', sorted)
