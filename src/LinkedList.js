@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-export default class LinkedList {
+module.exports = class LinkedList {
   constructor() {
     this.head = null;
     this.size = 0;
@@ -35,84 +35,98 @@ export default class LinkedList {
     return current
   }
 
-  insertAt(data, index) {
-    if (index > this.size) throw new Error('Index does not exist')
-
-    const node = new Node(data)
-    let preceding = this.head
-    let following = null
-
-    if (index === 0) {
-      node.next = preceding
-      this.head = node
-    } else {
-      for(let i = 1; i < index - 1; i++) {
-        preceding = preceding.next
-      }
-
-      following = preceding.next
-
-      node.prev = preceding
-      node.next = following
-
-      preceding.next = node
-      following.prev = node
-    }
-
-    this.size = this.size + 1
-    return this
-  }
-
-  remove(target) {
-    let preceding = null
-    let following = null
+  getNodeByIndex(targetIndex) {
     let current = this.head
 
-    while (current) {
-      if (current.data === target) {
-        following = current.next
-        preceding.next = following
-        following.prev = preceding
-        this.size = this.size - 1
-      }
-
-      preceding = current
+    for(let i = 0; i < targetIndex; i++) {
       current = current.next
     }
 
+    return current
+  }
+
+  insertNode(targetIndex, node) {
+    const following = this.getNodeByIndex(targetIndex)
+    const preceding = following.prev
+
+    following.prev = node
+    preceding.next = node
+
+    node.next = following
+    node.prev = preceding
+
+    this.size = this.size + 1
+  }
+
+  replaceHead(node) {
+    node.next = this.head
+    this.head.prev = node
+    this.head = node
+    this.size = this.size + 1
+  }
+
+  insertAt(targetIndex, data) {
+    if (targetIndex > this.size) throw new Error('Target index does not exist')
+
+    const node = new Node(data)
+
+    if (targetIndex === this.size) {
+      this.add(data)
+    } else if (targetIndex === 0) {
+      this.replaceHead(node)
+    } else {
+      this.insertNode(targetIndex, node)
+    }
+
     return this
   }
 
-  removeAt(index) {
-    if (index > this.size) throw new Error('Index does not exist')
+  removeItem(node) {
+    const preceding = node.prev
+    const following = node.next
 
-    let preceding = null
-    let following = null
-    let target = this.head
-
-    if (index === 0) {
-      this.head = this.head.next
-    } else {
-      for(let i = 0; i < index; i++) {
-        preceding = target
-        target = target.next
-      }
-      following = target.next
+    if (preceding) {
       preceding.next = following
-      following.prev = preceding
+    } else {
+      this.head = following
     }
 
+    if (following) following.prev = preceding
+
     this.size = this.size - 1
+  }
+
+  remove(targetData) {
+    let node = this.head
+
+    while (node) {
+      if (node.data === targetData) this.removeItem(node)
+      node = node.next
+    }
+
+    return this
+  }
+
+  removeAt(targetIndex) {
+    if (targetIndex >= this.size) throw new Error('Target index does not exist')
+
+    if (targetIndex === 0) {
+      this.head = this.head.next
+    } else {
+      const node = this.getNodeByIndex(targetIndex)
+      this.removeItem(node)
+    }
+
     return this
   }
 
   print() {
-    let current = this.head
+    let current = this.head || {}
     let output = `${current.data}`
 
     while (current.next) {
       current = current.next
-      output += ` => ${current.data}`
+      output += ` <-> ${current.data}`
     }
 
     console.log(output)

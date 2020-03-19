@@ -1,17 +1,16 @@
-import Stack from './Stack'
-import LinkedList from './LinkedList'
-import Queue from './Queue'
+const LinkedList = require('./LinkedList')
+const Queue = require('./Queue')
+const Stack = require('./Stack')
 
+const linkedList = new LinkedList()
+// linkedList.add('1').add('2').add('3').add('4').add('5').add('6')
 
+// linkedList.add('initial')
+linkedList.print()
+linkedList.insertAt(0, 'insertedAtZero')
+// linkedList.insertAt(2, 'insertedAtTwo')
+console.log('linkedList', linkedList)
+// linkedList.insertAt(1, 'insertedAtOne')
 
-// const queue = new Queue()
-
-// queue.add('a')
-// queue.add('b')
-// queue.add('c')
-
-// console.log('queue', queue)
-// console.log('peek', queue.peek())
-// console.log('poll', queue.poll())
-// console.log('queue', queue)
-// console.log('peek', queue.peek())
+linkedList.print()
+// console.log('linkedList', linkedList)

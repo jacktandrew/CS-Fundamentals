@@ -1,31 +1,38 @@
-export default class Queue {
+module.exports = class Queue {
   constructor() {
-    this.index = 0
+    this.size = 0
+    this.start = 0
+    this.end = 0
   }
 
   add(item) {
-    this.index = this.index + 1
-    this[this.index] = item
+    this[this.end] = item
+    this.size = this.size + 1
+    this.end = this.end + 1
+
     return this
   }
 
   peek() {
-    const { index } = this
-    return this[index]
+    if (this.size <= 0) throw new Error('Queue is empty')
+    return this[this.start]
   }
 
   poll() {
-    const { index } = this
-    if (index <= 0) throw new Error('Stack is empty')
     const item = this.peek()
     this.remove()
     return item
   }
 
   remove() {
-    const { index } = this
-    if (index <= 0) throw new Error('Stack is empty')
-    delete this[index]
-    this.index = index - 1
+    if (this.size <= 0) throw new Error('Queue is empty')
+    delete this[this.start]
+    this.start = this.start + 1
+    this.size = this.size - 1
+  }
+
+  print() {
+    const output = JSON.stringify(this, null, 2)
+    console.log(output)
   }
 }

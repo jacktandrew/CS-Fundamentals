@@ -1,34 +1,39 @@
-export default class Stack {
+module.exports = class Stack {
   constructor() {
-    this.index = 0
+    this.size = 0
   }
 
   delete() {
-    const { index } = this
-    if (index <= 0) throw new Error('Stack is empty')
-    delete this[index]
-    this.index = index - 1
+    const { size } = this
+    if (size <= 0) throw new Error('Stack is empty')
+    delete this[size - 1]
+    this.size = size - 1
     return this
   }
 
   peek() {
-    const { index } = this
-    const item = this[index]
+    const { size } = this
+    const item = this[size - 1]
     return item
   }
 
   pop() {
-    const { index } = this
-    if (index <= 0) throw new Error('Stack is empty')
+    const { size } = this
+    if (size <= 0) throw new Error('Stack is empty')
     const item = this.peek()
     this.delete()
     return item
   }
 
   push(item) {
-    const { index } = this
-    this.index = index + 1
-    this[this.index] = item
+    const { size } = this
+    this[size] = item
+    this.size = size + 1
     return this
+  }
+
+  print() {
+    const output = JSON.stringify(this, null, 2)
+    console.log(output)
   }
 }
