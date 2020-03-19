@@ -1,16 +1,21 @@
+const BinaryTree = require('./BinaryTree')
 const LinkedList = require('./LinkedList')
 const Queue = require('./Queue')
 const Stack = require('./Stack')
 
-const linkedList = new LinkedList()
-// linkedList.add('1').add('2').add('3').add('4').add('5').add('6')
+const binaryTree = new BinaryTree()
+const getRand = () => Math.floor(Math.random() * 9)
 
-// linkedList.add('initial')
-linkedList.print()
-linkedList.insertAt(0, 'insertedAtZero')
-// linkedList.insertAt(2, 'insertedAtTwo')
-console.log('linkedList', linkedList)
-// linkedList.insertAt(1, 'insertedAtOne')
+binaryTree.insert(2)
+binaryTree.insert(4)
+binaryTree.insert(3)
+binaryTree.insert(5)
+binaryTree.insert(6)
+binaryTree.insert(4)
+binaryTree.insert(4)
+binaryTree.print()
+binaryTree.remove(4)
+binaryTree.print()
 
-linkedList.print()
-// console.log('linkedList', linkedList)
+window.binaryTree = binaryTree
+
