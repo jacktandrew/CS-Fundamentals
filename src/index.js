@@ -3,9 +3,9 @@ const LinkedList = require('./data-structures/LinkedList')
 const Queue = require('./data-structures/Queue')
 const Stack = require('./data-structures/Stack')
 const quickSort = require('./algorithms/quickSort')
-const radixSort = require('./algorithms/radixSort')
+const { radixSortMsd, radixSortLsd } = require('./algorithms/radixSort')
 
-const getRandomNumber = () => Math.floor(Math.random() * 100)
+const getRandomNumber = () => Math.floor(Math.random() * 50000)
 
 const getRandomList = length => {
   const list = []
@@ -15,7 +15,8 @@ const getRandomList = length => {
   return list
 }
 
-const list = getRandomList(9)
-console.log('list', list)
-const sorted = radixSort(list)
-console.log('sorted', sorted)
+const words = ['angel', 'cut', 'bone', 'ax', 'a', 'an', 'bat', 'cargo', 'apple']
+const numbers = getRandomList(99)
+
+console.log('radixSortMsd', radixSortMsd(words))
+console.log('radixSortLsd', radixSortLsd(numbers))

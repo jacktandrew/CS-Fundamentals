@@ -1,42 +1,61 @@
-const emptyBuckets = (workingArray, buckets) => {
-  workingArray.length = 0
+const chars = [
+  0,1,2,3,4,5,6,7,8,9,
+  'a','b','c','d','e',
+  'f','g','h','i','j',
+  'k','l','m','n','o',
+  'p','q','r','s','t',
+  'u','v','w','x','y','z'
+]
 
-  buckets.forEach(bucket => {
-    if (bucket.length > 0) {
-      workingArray.push(...bucket)
-      bucket.length = 0
-    }
-  })
+const radixSortMsd = (list, index = 0) => {
+  const buckets = list.reduce((buckets, item) => {
+    const char = item.toString()[index] || 0
+
+    if (buckets.hasOwnProperty(char))
+      buckets[char].push(item)
+    else
+      buckets[char] = [item]
+    return buckets
+  }, {})
+
+  return chars.reduce((acc, char) => {
+    const bucket = buckets[char]
+
+    if (!bucket || !bucket.length) return acc
+
+    const sorted = (bucket.length <= 1)
+      ? bucket
+      : radixSortMsd(bucket, index + 1)
+
+    return acc.concat(sorted)
+  }, [])
 }
 
-const getSignificantDigit = (item, power) => {
-  const tenPower = Math.pow(10, power)
-  return Math.floor(item / tenPower) % 10
+const getMaxLength = list => {
+  const maxNumber = Math.max(...list)
+  return maxNumber.toString().length
 }
 
-module.exports = function radixSort(list) {
-  const results = []
-  const buckets = [[], [], [], [], [], [], [], [], [], []]
-  const workingArray = [...list]
+const radixSortLsd = (list, index = 0, maxLength) => {
+  const empties = [[],[],[],[],[],[],[],[],[],[]]
+  maxLength = maxLength || getMaxLength(list)
 
-  let power = 0
+  const buckets = list.reduce((buckets, number) => {
+    const str = number.toString()
+    const target = str.length - 1 - index
+    const key = str[target] || 0
+    buckets[key].push(number)
+    return buckets
+  }, empties)
 
-  if (list.length <= 1) return workingArray
+  const flattened = [].concat.apply([], buckets)
 
-  while (workingArray.length > 0) {
-    workingArray.forEach(item => {
-      const digit = getSignificantDigit(item, power)
+  return (index < maxLength)
+    ? radixSortLsd(flattened, index + 1, maxLength)
+    : flattened
+}
 
-      if (item < Math.pow(10, power)) {
-        results.push(item)
-      } else {
-        buckets[digit].push(item)
-      }
-    })
-
-    power += 1
-    emptyBuckets(workingArray, buckets)
-  }
-
-  return results
+module.exports = {
+  radixSortMsd,
+  radixSortLsd,
 }
