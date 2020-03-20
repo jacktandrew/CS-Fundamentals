@@ -15,7 +15,7 @@ const getRandomList = length => {
   return list
 }
 
-const words = ['angel', 'cut', 'bone', 'ax', 'a', 'an', 'bat', 'cargo', 'apple']
+const words = ['angel', 'cut', 3, 'bone', 1, 'ax', 2, 'a', 'an', 'bat', 'cargo', 'apple']
 const numbers = getRandomList(99)
 
 console.log('radixSortMsd', radixSortMsd(words))

@@ -8,8 +8,8 @@ class Node {
 
 module.exports = class LinkedList {
   constructor() {
-    this.head = null;
-    this.size = 0;
+    this.head = null
+    this.size = 0
   }
 
   add(data) {

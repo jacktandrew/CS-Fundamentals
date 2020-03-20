@@ -1,4 +1,4 @@
-const BinaryTree = require('./BinaryTree');
+const BinaryTree = require('./BinaryTree')
 
 describe('BinaryTree', () => {
   let binaryTree
