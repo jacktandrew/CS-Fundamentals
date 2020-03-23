@@ -2,6 +2,7 @@ const BinaryTree = require('./data-structures/BinaryTree')
 const LinkedList = require('./data-structures/LinkedList')
 const Queue = require('./data-structures/Queue')
 const Stack = require('./data-structures/Stack')
+const { getSequence } = require('./algorithms/fibonacci')
 const insertionSort = require('./algorithms/insertionSort')
 const mergeSort = require('./algorithms/mergeSort')
 const quickSort = require('./algorithms/quickSort')
@@ -17,8 +18,4 @@ const getRandomList = length => {
   return list
 }
 
-const words = ['angel', 'cut', 'bone', 'ax', 'a', 'an', 'bat', 'cargo', 'apple']
-const numbers = getRandomList(9)
-
-console.log('insertionSort', insertionSort(words))
-// console.log('insertionSort', insertionSort(numbers))
+console.log('getSequence', getSequence(9))
