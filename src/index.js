@@ -2,10 +2,12 @@ const BinaryTree = require('./data-structures/BinaryTree')
 const LinkedList = require('./data-structures/LinkedList')
 const Queue = require('./data-structures/Queue')
 const Stack = require('./data-structures/Stack')
+const insertionSort = require('./algorithms/insertionSort')
+const mergeSort = require('./algorithms/mergeSort')
 const quickSort = require('./algorithms/quickSort')
 const { radixSortMsd, radixSortLsd } = require('./algorithms/radixSort')
 
-const getRandomNumber = () => Math.floor(Math.random() * 50000)
+const getRandomNumber = () => Math.floor(Math.random() * 50)
 
 const getRandomList = length => {
   const list = []
@@ -15,8 +17,8 @@ const getRandomList = length => {
   return list
 }
 
-const words = ['angel', 'cut', 3, 'bone', 1, 'ax', 2, 'a', 'an', 'bat', 'cargo', 'apple']
-const numbers = getRandomList(99)
+const words = ['angel', 'cut', 'bone', 'ax', 'a', 'an', 'bat', 'cargo', 'apple']
+const numbers = getRandomList(9)
 
-console.log('radixSortMsd', radixSortMsd(words))
-console.log('radixSortLsd', radixSortLsd(numbers))
+console.log('insertionSort', insertionSort(words))
+// console.log('insertionSort', insertionSort(numbers))
